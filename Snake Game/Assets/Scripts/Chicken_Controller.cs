@@ -23,7 +23,6 @@ public class Chicken_Controller : MonoBehaviour
         //console it other
         
         if(other.gameObject.CompareTag("Snake")){
-            Debug.Log("Snake ate the chicken");
             RandomChickenPosition();
             _snake.GetComponent<Snake_Controller>().CreateSegment();
         }

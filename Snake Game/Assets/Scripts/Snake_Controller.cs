@@ -8,10 +8,14 @@ public class Snake_Controller : MonoBehaviour
     private Vector2 _direction;
     [SerializeField] private GameObject _segmentPrefab;
     private List<GameObject> _segments = new List<GameObject>();
+
+    private Score_Controller scoreController;
+
     void Start()
     {
         Reset();
         ResetSegments();
+        
     }
 
     // Update is called once per frame
@@ -56,6 +60,9 @@ public class Snake_Controller : MonoBehaviour
     Vector2 newSegmentPosition = _segments[_segments.Count-1].transform.position - new Vector3(_direction.x, _direction.y, 0);
     GameObject segment = Instantiate(_segmentPrefab, newSegmentPosition, Quaternion.identity);
     _segments.Add(segment);
+
+    Score_Controller.score = _segments.Count - 2;
+
 }
 
 
@@ -85,6 +92,7 @@ public class Snake_Controller : MonoBehaviour
    private void OnTriggerEnter2D(Collider2D other){
      if(other.gameObject.CompareTag("Wall") || (other.gameObject.CompareTag("Segment") && other.gameObject != _segments[1])){
          RestartGame();
+          Score_Controller.score = 0;
         }
     }
 
