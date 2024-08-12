@@ -65,3 +65,6 @@ Bu proje, basit bir Yılan oyunu geliştirmek için oluşturulmuştur. Oyuncu y�
 - **Etkileşim Yönetimi**: OnTriggerEnter2D ile çarpışmaları tespit eder ve oyunun yeniden başlatılması gibi eylemleri gerçekleştirir.
 - **Skor Sistemi**: Oyuncunun mevcut puanını ve yüksek skorunu ekranda gösterir ve PlayerPrefs kullanılarak verileri kalıcı olarak saklar.
 
+## Screenshot
+
+![SS](sneak.png)
