@@ -53,9 +53,11 @@ public class Snake_Controller : MonoBehaviour
     }
 
     public void CreateSegment(){
-        GameObject segment = Instantiate(_segmentPrefab, _segments[_segments.Count-1].transform.position, Quaternion.identity);
-        _segments.Add(segment);
-    }
+    Vector2 newSegmentPosition = _segments[_segments.Count-1].transform.position - new Vector3(_direction.x, _direction.y, 0);
+    GameObject segment = Instantiate(_segmentPrefab, newSegmentPosition, Quaternion.identity);
+    _segments.Add(segment);
+}
+
 
     private void Move(){
         float x,y;
@@ -65,25 +67,25 @@ public class Snake_Controller : MonoBehaviour
     }
 
     public Vector2 GetUserInput(){
-        if(Input.GetKey(KeyCode.W)){
+        if(Input.GetKey(KeyCode.W) && _direction != Vector2.down){
             _direction = Vector2.up;
         }
-        else if(Input.GetKey(KeyCode.S)){
+        else if(Input.GetKey(KeyCode.S) && _direction != Vector2.up){
             _direction = Vector2.down;
         }
-        else if(Input.GetKey(KeyCode.A)){
+        else if(Input.GetKey(KeyCode.A) && _direction != Vector2.right){
             _direction = Vector2.left;
         }
-        else if(Input.GetKey(KeyCode.D)){
+        else if(Input.GetKey(KeyCode.D) && _direction != Vector2.left){
             _direction = Vector2.right;
         }
         return _direction;
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-         if(other.gameObject.CompareTag("Wall")){
-            Debug.Log("Snake hit the wall");
-            RestartGame();
+   private void OnTriggerEnter2D(Collider2D other){
+     if(other.gameObject.CompareTag("Wall") || (other.gameObject.CompareTag("Segment") && other.gameObject != _segments[1])){
+         RestartGame();
         }
     }
+
 }
